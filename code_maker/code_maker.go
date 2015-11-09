@@ -11,6 +11,13 @@ var (
 )
 
 func Generate(params ...string) string {
+type CodeMaker struct {
+	code string
+}
+
+func NewCodeMaker() *CodeMaker {
+	return &CodeMaker{}
+}
 	// if a specific code is passed in
 	// use that as the code
 	if len(params) >= 1 {
