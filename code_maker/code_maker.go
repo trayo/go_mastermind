@@ -6,8 +6,8 @@ import (
 )
 
 var (
-	colors             = []string{"r", "b", "g", "y"}
-	easyModeCodeLength = 4
+	colors     = []string{"r", "b", "g", "y"}
+	codeLength = 4
 )
 
 func Generate(params ...string) string {
