@@ -45,7 +45,7 @@ var _ = Describe("code maker", func() {
 		Expect(code).To(Equal("rrrr"))
 	})
 
-	It("ignores other arguments", func() {
+	It("ignores extra arguments", func() {
 		code = codeMaker.Generate("yyyy", "bbbb", "gggg")
 
 		Expect(code).To(Equal("yyyy"))
