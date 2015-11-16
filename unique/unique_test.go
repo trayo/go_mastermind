@@ -9,18 +9,18 @@ import (
 
 var _ = Describe("removing duplicate elements", func() {
 	It("can remove duplicate letters", func() {
-		elements := []string{"r", "y", "g", "r", "y", "g", "b"}
+		elements := "rygrygb"
 
-		newElements := unique.RemoveDuplicateStrings(elements)
+		newElements := unique.RemoveDuplicateLetters(elements)
 
-		Expect(newElements).To(Equal([]string{"r", "y", "g", "b"}))
+		Expect(newElements).To(Equal("rygb"))
 	})
 
 	It("can return an array of a unique letter", func() {
-		elements := []string{"r", "r", "r", "r", "r", "r", "r"}
+		elements := "rrrrrrr"
 
-		newElements := unique.RemoveDuplicateStrings(elements)
+		newElements := unique.RemoveDuplicateLetters(elements)
 
-		Expect(newElements).To(Equal([]string{"r"}))
+		Expect(newElements).To(Equal("r"))
 	})
 })

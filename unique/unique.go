@@ -1,8 +1,8 @@
 package unique
 
-func RemoveDuplicateStrings(elements []string) []string {
-	encountered := map[string]bool{}
-	result := []string{}
+func RemoveDuplicateLetters(elements string) string {
+	encountered := map[rune]bool{}
+	result := []rune{}
 
 	for _, element := range elements {
 		if encountered[element] != true {
@@ -11,5 +11,5 @@ func RemoveDuplicateStrings(elements []string) []string {
 		}
 	}
 
-	return result
+	return string(result)
 }
