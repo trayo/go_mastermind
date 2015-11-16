@@ -100,8 +100,8 @@ var _ = Describe("checking colors", func() {
 	})
 
 	It("can check for all correct colors", func() {
-		code = "bbbb"
-		guess = "bbbb"
+		code = "rybg"
+		guess = "gbyr"
 
 		answer = check.Colors(guess, code)
 
