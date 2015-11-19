@@ -10,15 +10,7 @@ var (
 	codeLength = 4
 )
 
-type CodeMaker struct {
-	code string
-}
-
-func NewCodeMaker() *CodeMaker {
-	return &CodeMaker{}
-}
-
-func (self CodeMaker) Generate(params ...string) string {
+func Generate(params ...string) string {
 	// if a specific code is passed in
 	// use that as the code
 	if len(params) >= 1 {
@@ -26,11 +18,11 @@ func (self CodeMaker) Generate(params ...string) string {
 	}
 
 	rand.Seed(time.Now().UTC().UnixNano())
-	self.code = ""
+	code := ""
 
 	for i := 0; i < codeLength; i++ {
-		self.code += colors[rand.Intn(len(colors))]
+		code += colors[rand.Intn(len(colors))]
 	}
 
-	return self.code
+	return code
 }
