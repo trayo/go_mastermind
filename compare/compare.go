@@ -11,11 +11,15 @@ type Compare struct {
 	code             string
 }
 
-func NewCompare(params ...string) *Compare {
-	guess := params[0]
-	code := params[1]
+func NewCompare(args ...string) *Compare {
+	var (
+		code  string
+		guess = args[0]
+	)
 
-	if params[1] == nil {
+	if len(args) > 1 {
+		code = args[1]
+	} else {
 		code = code_maker.Generate()
 	}
 
