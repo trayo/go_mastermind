@@ -8,7 +8,7 @@ import (
 type Compare struct {
 	CorrectPositions string
 	CorrectColors    string
-	code             string
+	Code             string
 }
 
 func NewCompare(args ...string) *Compare {
@@ -26,11 +26,11 @@ func NewCompare(args ...string) *Compare {
 	return &Compare{
 		CorrectPositions: check.Positions(guess, code),
 		CorrectColors:    check.Colors(guess, code),
-		code:             code,
+		Code:             code,
 	}
 }
 
 func (self *Compare) Guess(guess string) {
-	self.CorrectPositions = check.Positions(guess, self.code)
-	self.CorrectColors = check.Colors(guess, self.code)
+	self.CorrectPositions = check.Positions(guess, self.Code)
+	self.CorrectColors = check.Colors(guess, self.Code)
 }

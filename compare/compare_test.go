@@ -1,6 +1,8 @@
 package compare_test
 
 import (
+	"regexp"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
@@ -44,5 +46,12 @@ var _ = Describe("comparing guesses and codes", func() {
 
 		Expect(comp.CorrectPositions).To(Equal("4"))
 		Expect(comp.CorrectColors).To(Equal("4"))
+	})
+
+	It("can use the code package to make a random code", func() {
+		guess := "rybg"
+
+		comp = compare.NewCompare(guess)
+		Expect(regexp.MatchString("^[rgby]{4}$", comp.Code)).To(BeTrue())
 	})
 })
