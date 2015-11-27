@@ -19,14 +19,13 @@ func main() {
 
 	input := getInput()
 	for !wantsToQuit(input) {
-		if wantsInstructions(input) {
-			print.Instructions()
-		} else if wantsToPlay(input) {
-			// print.GameStart()
-			// game.Play()
+		switch {
+		case wantsInstructions(input):
 			clearScreen()
-			print.WelcomeMessage()
-		} else {
+			print.Instructions()
+		case wantsToPlay(input):
+			clearScreen()
+		default:
 			print.UnknownCommand()
 		}
 
