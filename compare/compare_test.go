@@ -27,16 +27,6 @@ var _ = Describe("comparing guesses and codes", func() {
 		Expect(comp.CorrectColors).To(Equal("0"))
 	})
 
-	It("compares guesses upon creation", func() {
-		code := "rgrg"
-		guess := "gggg"
-
-		comp = compare.NewCompare(guess, code)
-
-		Expect(comp.CorrectPositions).To(Equal("2"))
-		Expect(comp.CorrectColors).To(Equal("2"))
-	})
-
 	It("can compare new guesses", func() {
 		code := "ybgr"
 		guess := "rybg"
@@ -53,5 +43,12 @@ var _ = Describe("comparing guesses and codes", func() {
 
 		comp = compare.NewCompare(guess)
 		Expect(regexp.MatchString("^[rgby]{4}$", comp.Code)).To(BeTrue())
+	})
+
+	It("can be initialized empty", func() {
+		comp = compare.NewCompare()
+
+		Expect(comp.CorrectPositions).To(BeEmpty())
+		Expect(comp.CorrectColors).To(BeEmpty())
 	})
 })
