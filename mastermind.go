@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"os"
-	"os/exec"
 	"strings"
 	"time"
 
@@ -14,19 +13,17 @@ import (
 var reader = *bufio.NewReader(os.Stdin)
 
 func main() {
-	clearScreen()
 	print.WelcomeMessage()
 
 	input := getInput()
 	for !wantsToQuit(input) {
 		switch {
 		case wantsInstructions(input):
-			clearScreen()
 			print.Instructions()
 		case wantsToPlay(input):
-			clearScreen()
 			print.GameStart()
 			game.Play(&reader)
+			print.ThanksForPlaying()
 		default:
 			print.UnknownCommand()
 		}
@@ -35,7 +32,6 @@ func main() {
 	}
 
 	print.QuitMessage()
-	clearScreen()
 	os.Exit(0)
 }
 
@@ -45,11 +41,6 @@ func getInput() string {
 	return s
 }
 
-func clearScreen() {
-	c := exec.Command("clear")
-	c.Stdout = os.Stdout
-	c.Run()
-}
 
 func sleep(s time.Duration) {
 	time.Sleep(s * time.Millisecond)
