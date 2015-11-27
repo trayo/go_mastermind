@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/trayo/go_mastermind/game"
 	"github.com/trayo/go_mastermind/print"
 )
 
