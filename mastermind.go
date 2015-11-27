@@ -10,25 +10,27 @@ import (
 	"github.com/trayo/go_mastermind/print"
 )
 
-var reader = *bufio.NewReader(os.Stdin)
+var (
+	reader = *bufio.NewReader(os.Stdin)
+	input  string
+)
 
 func main() {
 	print.WelcomeMessage()
 
-	input := getInput()
 	for !wantsToQuit(input) {
+		print.WhatsNext()
+		input = getInput()
 		switch {
 		case wantsInstructions(input):
 			print.Instructions()
 		case wantsToPlay(input):
-			print.GameStart()
-			game.Play(&reader)
+			game.Play()
 			print.ThanksForPlaying()
 		default:
 			print.UnknownCommand()
 		}
 
-		input = getInput()
 	}
 
 	print.QuitMessage()
@@ -40,7 +42,6 @@ func getInput() string {
 	s = strings.Trim(s, "\n")
 	return s
 }
-
 
 func sleep(s time.Duration) {
 	time.Sleep(s * time.Millisecond)
