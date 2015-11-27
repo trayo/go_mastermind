@@ -32,7 +32,7 @@ func main() {
 		input = getInput()
 	}
 
-	print.GoodbyeMessage()
+	print.QuitMessage()
 	clearScreen()
 	os.Exit(0)
 }
