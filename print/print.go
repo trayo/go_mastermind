@@ -40,6 +40,18 @@ func WhatsNext() {
 	fmt.Println("Would you like to (p)lay read the (i)instructions or (q)uit?")
 }
 
+func GameStart() {
+	fmt.Println("I have generated a random code four characters in length using the letters:")
+	fmt.Println("'r', 'g', 'b' and 'y'")
+	fmt.Println("\nTry and guess the code by providing input like: 'rrrr'")
+	EnterAGuess()
+}
+
+func EnterAGuess() {
+	fmt.Println("Enter your guess:")
+	prompt()
+}
+
 func prompt() {
 	fmt.Print("> ")
 }
