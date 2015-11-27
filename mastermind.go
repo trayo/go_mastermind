@@ -25,6 +25,8 @@ func main() {
 			print.Instructions()
 		case wantsToPlay(input):
 			clearScreen()
+			print.GameStart()
+			game.Play(&reader)
 		default:
 			print.UnknownCommand()
 		}
