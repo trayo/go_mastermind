@@ -2,30 +2,38 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strings"
 	"time"
 
-	"github.com/trayo/go_mastermind/game"
 	"github.com/trayo/go_mastermind/print"
 )
 
 var (
-	reader = *bufio.NewReader(os.Stdin)
+	reader *bufio.Reader
 	input  string
 )
 
 func main() {
+	r := bufio.NewReader(os.Stdin)
+	Run(r)
+}
+
+func Run(stdin *bufio.Reader) {
+	reader = stdin
+
 	print.WelcomeMessage()
 
 	for !wantsToQuit(input) {
 		print.WhatsNext()
 		input = getInput()
+		fmt.Printf("input: %v", input)
 		switch {
 		case wantsInstructions(input):
 			print.Instructions()
 		case wantsToPlay(input):
-			game.Play()
+			// game.Play()
 			print.ThanksForPlaying()
 		default:
 			print.UnknownCommand()
