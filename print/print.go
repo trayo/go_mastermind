@@ -36,7 +36,7 @@ func UnknownCommand() {
 }
 
 func WhatsNext() {
-	fmt.Println("Would you like to (p)lay read the (i)instructions or (q)uit?")
+	fmt.Println("Would you like to (p)lay read the (i)nstructions or (q)uit?")
 	prompt()
 }
 
