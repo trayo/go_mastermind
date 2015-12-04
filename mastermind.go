@@ -16,8 +16,8 @@ var (
 )
 
 func main() {
-	r := bufio.NewReader(os.Stdin)
-	Run(r)
+	stdin := bufio.NewReader(os.Stdin)
+	Run(stdin)
 }
 
 func Run(stdin *bufio.Reader) {
