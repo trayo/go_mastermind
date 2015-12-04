@@ -42,7 +42,6 @@ func Run(stdin *bufio.Reader) {
 	}
 
 	print.QuitMessage()
-	os.Exit(0)
 }
 
 func getInput() string {
