@@ -24,11 +24,10 @@ func Run(stdin *bufio.Reader) {
 	reader = stdin
 
 	print.WelcomeMessage()
+	print.WhatsNext()
+	input = getInput()
 
 	for !wantsToQuit(input) {
-		print.WhatsNext()
-		input = getInput()
-		fmt.Printf("input: %v", input)
 		switch {
 		case wantsInstructions(input):
 			print.Instructions()
@@ -39,6 +38,8 @@ func Run(stdin *bufio.Reader) {
 			print.UnknownCommand()
 		}
 
+		print.WhatsNext()
+		input = getInput()
 	}
 
 	print.QuitMessage()
