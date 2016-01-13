@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"time"
 )
 
 func WelcomeMessage() {
@@ -13,11 +12,7 @@ func WelcomeMessage() {
 }
 
 func QuitMessage() {
-	for i := 0; i < 30; i++ {
-		fmt.Println("byeeee")
-		time.Sleep(30 * time.Millisecond)
-	}
-	clearScreen()
+	fmt.Println("byeeee")
 }
 
 func Instructions() {
