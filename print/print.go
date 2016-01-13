@@ -2,58 +2,65 @@ package print
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 )
 
-func WelcomeMessage() {
+type Printer struct {
+	writer io.Writer
+}
+
+func NewPrinter(writer io.Writer) Printer {
+	return Printer{
+		writer: writer,
+	}
+}
+
+func (p Printer) WelcomeMessage() {
 	clearScreen()
-	fmt.Println("Welcome to Mastermind!")
+	fmt.Fprintln(p.writer, "Welcome to Mastermind!")
 }
 
-func QuitMessage() {
-	fmt.Println("byeeee")
+func (p Printer) QuitMessage() {
+	fmt.Fprintln(p.writer, "byeeee")
 }
 
-func Instructions() {
+func (p Printer) Instructions() {
 	clearScreen()
-	fmt.Println("The game will generate a sequence with four elements made up of: ")
-	fmt.Println("(r)ed, (g)reen, (b)lue, and (y)ellow. It will look like 'rybg'.")
-	fmt.Println("Your goal is to guess the code in the fewest guesses possible.")
-	fmt.Println("\nGuesses must be four characters long and only contain 'r', 'g', 'b' and 'y'.")
-	fmt.Println("It doesn't matter if the guess is upper case or lower case.")
-	fmt.Println("The game will then tell you correct positions and correct colors.")
-	fmt.Println("Good luck!\n")
+	fmt.Fprintln(p.writer, "The game will generate a sequence with four elements made up of: ")
+	fmt.Fprintln(p.writer, "(r)ed, (g)reen, (b)lue, and (y)ellow. It will look like 'rybg'.")
+	fmt.Fprintln(p.writer, "Your goal is to guess the code in the fewest guesses possible.")
+	fmt.Fprintln(p.writer, "\nGuesses must be four characters long and only contain 'r', 'g', 'b' and 'y'.")
+	fmt.Fprintln(p.writer, "It doesn't matter if the guess is upper case or lower case.")
+	fmt.Fprintln(p.writer, "The game will then tell you correct positions and correct colors.")
+	fmt.Fprintln(p.writer, "Good luck!\n")
 }
 
-func UnknownCommand() {
-	fmt.Println("Unknown command! Please try again ...\n")
+func (p Printer) UnknownCommand() {
+	fmt.Fprintln(p.writer, "Unknown command! Please try again ...\n")
 }
 
-func WhatsNext() {
-	fmt.Println("Would you like to (p)lay read the (i)nstructions or (q)uit?")
-	prompt()
+func (p Printer) WhatsNext() {
+	fmt.Fprintln(p.writer, "Would you like to (p)lay read the (i)nstructions or (q)uit?")
+	fmt.Fprintln(p.writer, "> ")
 }
 
-func GameStart() {
+func (p Printer) GameStart() {
 	clearScreen()
-	fmt.Println("I have generated a random code four characters in length using the letters:")
-	fmt.Println("'r', 'g', 'b' and 'y'")
-	fmt.Println("\nTry and guess the code by providing input like: 'rrrr'")
+	fmt.Fprintln(p.writer, "I have generated a random code four characters in length using the letters:")
+	fmt.Fprintln(p.writer, "'r', 'g', 'b' and 'y'")
+	fmt.Fprintln(p.writer, "\nTry and guess the code by providing input like: 'rrrr'")
 }
 
-func EnterAGuess() {
-	fmt.Println("Enter your guess:")
-	prompt()
+func (p Printer) EnterAGuess() {
+	fmt.Fprintln(p.writer, "Enter your guess:")
+	fmt.Fprintln(p.writer, "> ")
 }
 
-func ThanksForPlaying() {
-	fmt.Println("Thanks for playing!")
-	fmt.Println("Remember, winners don't do drugs.\n")
-}
-
-func prompt() {
-	fmt.Print("> ")
+func (p Printer) ThanksForPlaying() {
+	fmt.Fprintln(p.writer, "Thanks for playing!")
+	fmt.Fprintln(p.writer, "Remember, winners don't do drugs.\n")
 }
 
 func clearScreen() {
