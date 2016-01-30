@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/trayo/go_mastermind/print"
 )
@@ -52,10 +51,6 @@ func getInput() string {
 	s, _ := reader.ReadString('\n')
 	s = strings.Trim(s, "\n")
 	return s
-}
-
-func sleep(s time.Duration) {
-	time.Sleep(s * time.Millisecond)
 }
 
 func wantsToQuit(s string) bool {
