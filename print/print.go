@@ -3,7 +3,6 @@ package print
 import (
 	"fmt"
 	"io"
-	"os"
 	"os/exec"
 )
 
@@ -62,6 +61,6 @@ func (p Printer) ThanksForPlaying() {
 
 func (p Printer) ClearScreen() {
 	c := exec.Command("clear")
-	c.Stdout = os.Stdout
+	c.Stdout = p.writer
 	c.Run()
 }
