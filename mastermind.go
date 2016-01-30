@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -17,32 +16,36 @@ var (
 
 func main() {
 	stdin := bufio.NewReader(os.Stdin)
-	Run(stdin)
+	printer := print.NewPrinter(os.Stdout)
+	Run(stdin, printer)
 }
 
-func Run(stdin *bufio.Reader) {
+func Run(stdin *bufio.Reader, printer print.Printer) {
 	reader = stdin
 
-	print.WelcomeMessage()
-	print.WhatsNext()
+	printer.ClearScreen()
+	printer.WelcomeMessage()
+	printer.WhatsNext()
 	input = getInput()
 
 	for !wantsToQuit(input) {
 		switch {
 		case wantsInstructions(input):
-			print.Instructions()
+			printer.ClearScreen()
+			printer.Instructions()
 		case wantsToPlay(input):
+			printer.ClearScreen()
 			// game.Play()
-			print.ThanksForPlaying()
+			printer.ThanksForPlaying()
 		default:
-			print.UnknownCommand()
+			printer.UnknownCommand()
 		}
 
-		print.WhatsNext()
+		printer.WhatsNext()
 		input = getInput()
 	}
 
-	print.QuitMessage()
+	printer.QuitMessage()
 }
 
 func getInput() string {
