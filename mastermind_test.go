@@ -16,10 +16,13 @@ import (
 var _ = Describe("Main CLI interaction", func() {
 
 	var (
-		stdin       *bytes.Buffer
-		stdinReader *bufio.Reader
-		buffer      *gbytes.Buffer
-		printer     print.Printer
+		stdin           *bytes.Buffer
+		stdinReader     *bufio.Reader
+		buffer          *gbytes.Buffer
+		printer         print.Printer
+		commandSequence = func(args ...string) {
+			stdin.WriteString(strings.Join(args, "\n"))
+		}
 	)
 
 	BeforeEach(func() {
@@ -33,7 +36,7 @@ var _ = Describe("Main CLI interaction", func() {
 
 	Context("when providing input", func() {
 		It("can quit the game", func() {
-			commandSequence(stdin, "q")
+			commandSequence("q")
 
 			main.Run(stdinReader, printer)
 
@@ -42,7 +45,7 @@ var _ = Describe("Main CLI interaction", func() {
 		})
 
 		It("can visit the instructions page", func() {
-			commandSequence(stdin, "i", "q")
+			commandSequence("i", "q")
 
 			main.Run(stdinReader, printer)
 
@@ -52,7 +55,7 @@ var _ = Describe("Main CLI interaction", func() {
 		})
 
 		It("can visit the instructions page multiple times", func() {
-			commandSequence(stdin, "i", "i", "q")
+			commandSequence("i", "i", "q")
 
 			main.Run(stdinReader, printer)
 
@@ -63,7 +66,3 @@ var _ = Describe("Main CLI interaction", func() {
 		})
 	})
 })
-
-func commandSequence(stdin *bytes.Buffer, args ...string) {
-	stdin.WriteString(strings.Join(args, "\n"))
-}
