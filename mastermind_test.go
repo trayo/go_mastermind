@@ -11,6 +11,7 @@ import (
 
 	"github.com/trayo/go_mastermind"
 	"github.com/trayo/go_mastermind/print"
+	mocks "github.com/trayo/go_mastermind/test/mocks"
 )
 
 var _ = Describe("Main CLI interaction", func() {
@@ -20,12 +21,15 @@ var _ = Describe("Main CLI interaction", func() {
 		stdinReader     *bufio.Reader
 		buffer          *gbytes.Buffer
 		printer         print.Printer
+		mockGamer       *mocks.MockGamer
 		commandSequence = func(args ...string) {
 			stdin.WriteString(strings.Join(args, "\n"))
 		}
 	)
 
 	BeforeEach(func() {
+		mockGamer = mocks.NewMockGamer(mockCtrl)
+
 		stdin = &bytes.Buffer{}
 		stdinReader = bufio.NewReader(stdin)
 
@@ -38,7 +42,7 @@ var _ = Describe("Main CLI interaction", func() {
 		It("can quit the game", func() {
 			commandSequence("q")
 
-			main.Run(stdinReader, printer)
+			main.Run(mockGamer, stdinReader, printer)
 
 			Eventually(buffer).Should(gbytes.Say("Welcome"))
 			Eventually(buffer).Should(gbytes.Say("byeee"))
@@ -47,7 +51,7 @@ var _ = Describe("Main CLI interaction", func() {
 		It("can visit the instructions page", func() {
 			commandSequence("i", "q")
 
-			main.Run(stdinReader, printer)
+			main.Run(mockGamer, stdinReader, printer)
 
 			Eventually(buffer).Should(gbytes.Say("Welcome"))
 			Eventually(buffer).Should(gbytes.Say("generate a sequence"))
@@ -57,12 +61,20 @@ var _ = Describe("Main CLI interaction", func() {
 		It("can visit the instructions page multiple times", func() {
 			commandSequence("i", "i", "q")
 
-			main.Run(stdinReader, printer)
+			main.Run(mockGamer, stdinReader, printer)
 
 			Eventually(buffer).Should(gbytes.Say("Welcome"))
 			Eventually(buffer).Should(gbytes.Say("generate a sequence"))
 			Eventually(buffer).Should(gbytes.Say("generate a sequence"))
 			Eventually(buffer).Should(gbytes.Say("byeee"))
+		})
+
+		It("can start a game", func() {
+			commandSequence("p", "q")
+
+			mockGamer.EXPECT().Play()
+
+			main.Run(mockGamer, stdinReader, printer)
 		})
 	})
 })

@@ -2,9 +2,9 @@ package main
 
 import (
 	"bufio"
-	"os"
 	"strings"
 
+	I "github.com/trayo/go_mastermind/interfaces"
 	"github.com/trayo/go_mastermind/print"
 )
 
@@ -19,7 +19,7 @@ func main() {
 	Run(stdin, printer)
 }
 
-func Run(stdin *bufio.Reader, printer print.Printer) {
+func Run(gamer I.Gamer, stdin *bufio.Reader, printer print.Printer) {
 	reader = stdin
 
 	printer.ClearScreen()
@@ -34,7 +34,7 @@ func Run(stdin *bufio.Reader, printer print.Printer) {
 			printer.Instructions()
 		case wantsToPlay(input):
 			printer.ClearScreen()
-			// game.Play()
+			gamer.Play()
 			printer.ThanksForPlaying()
 		default:
 			printer.UnknownCommand()
