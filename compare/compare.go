@@ -5,11 +5,6 @@ import (
 	"github.com/trayo/go_mastermind/code_maker"
 )
 
-var (
-	code  string
-	guess string
-)
-
 type Compare struct {
 	CorrectPositions string
 	CorrectColors    string
@@ -17,6 +12,8 @@ type Compare struct {
 }
 
 func NewCompare(args ...string) *Compare {
+	var code string
+
 	if len(args) > 1 {
 		code = args[1]
 	} else {
