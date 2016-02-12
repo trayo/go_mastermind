@@ -5,10 +5,11 @@ import (
 	"time"
 )
 
-var (
-	colors     = []string{"r", "b", "g", "y"}
-	codeLength = 4
+const (
+	CODELENGTH = 4
 )
+
+var COLORS = []string{"r", "b", "g", "y"}
 
 func Generate(params ...string) string {
 	// if a specific code is passed in
@@ -20,8 +21,8 @@ func Generate(params ...string) string {
 	rand.Seed(time.Now().UTC().UnixNano())
 	code := ""
 
-	for i := 0; i < codeLength; i++ {
-		code += colors[rand.Intn(len(colors))]
+	for i := 0; i < CODELENGTH; i++ {
+		code += COLORS[rand.Intn(len(COLORS))]
 	}
 
 	return code
