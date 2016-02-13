@@ -2,15 +2,10 @@ package main
 
 import (
 	"bufio"
-	"strings"
 
+	"github.com/trayo/go_mastermind/input"
 	I "github.com/trayo/go_mastermind/interfaces"
 	"github.com/trayo/go_mastermind/print"
-)
-
-var (
-	reader *bufio.Reader
-	input  string
 )
 
 func main() {
@@ -20,19 +15,19 @@ func main() {
 }
 
 func Run(gamer I.Gamer, stdin *bufio.Reader, printer print.Printer) {
-	reader = stdin
+	var in string
 
 	printer.ClearScreen()
 	printer.WelcomeMessage()
 	printer.WhatsNext()
-	input = getInput()
+	in = input.GetInput(stdin)
 
-	for !wantsToQuit(input) {
+	for !input.WantsToQuit(in) {
 		switch {
-		case wantsInstructions(input):
+		case input.WantsInstructions(in):
 			printer.ClearScreen()
 			printer.Instructions()
-		case wantsToPlay(input):
+		case input.WantsToPlay(in):
 			printer.ClearScreen()
 			gamer.Play()
 			printer.ThanksForPlaying()
@@ -41,35 +36,8 @@ func Run(gamer I.Gamer, stdin *bufio.Reader, printer print.Printer) {
 		}
 
 		printer.WhatsNext()
-		input = getInput()
+		in = input.GetInput(stdin)
 	}
 
 	printer.QuitMessage()
-}
-
-func getInput() string {
-	s, _ := reader.ReadString('\n')
-	s = strings.Trim(s, "\n")
-	return s
-}
-
-func wantsToQuit(s string) bool {
-	if s == "q" || s == "quit" {
-		return true
-	}
-	return false
-}
-
-func wantsInstructions(s string) bool {
-	if s == "i" || s == "instructions" {
-		return true
-	}
-	return false
-}
-
-func wantsToPlay(s string) bool {
-	if s == "p" || s == "play" {
-		return true
-	}
-	return false
 }
