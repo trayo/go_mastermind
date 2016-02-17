@@ -19,8 +19,8 @@ func Generate(params ...string) string {
 	}
 
 	rand.Seed(time.Now().UTC().UnixNano())
-	code := ""
 
+	var code string
 	for i := 0; i < CODELENGTH; i++ {
 		code += COLORS[rand.Intn(len(COLORS))]
 	}
