@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"os"
 
+	"github.com/trayo/go_mastermind/game"
 	"github.com/trayo/go_mastermind/input"
 	I "github.com/trayo/go_mastermind/interfaces"
 	"github.com/trayo/go_mastermind/print"
@@ -11,7 +13,8 @@ import (
 func main() {
 	stdin := bufio.NewReader(os.Stdin)
 	printer := print.NewPrinter(os.Stdout)
-	Run(stdin, printer)
+	gamer := game.NewGamer()
+	Run(gamer, stdin, printer)
 }
 
 func Run(gamer I.Gamer, stdin *bufio.Reader, printer print.Printer) {
