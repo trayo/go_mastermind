@@ -50,7 +50,7 @@ func (p Printer) GameStart() {
 }
 
 func (p Printer) EnterAGuess() {
-	fmt.Fprintln(p.writer, "Enter your guess:")
+	fmt.Fprintln(p.writer, "Enter a guess:")
 	fmt.Fprint(p.writer, "> ")
 }
 

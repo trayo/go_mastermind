@@ -4,7 +4,9 @@
 package mock_interfaces
 
 import (
+	bufio "bufio"
 	gomock "github.com/golang/mock/gomock"
+	print "github.com/trayo/go_mastermind/print"
 )
 
 // Mock of Gamer interface
@@ -28,10 +30,10 @@ func (_m *MockGamer) EXPECT() *_MockGamerRecorder {
 	return _m.recorder
 }
 
-func (_m *MockGamer) Play() {
-	_m.ctrl.Call(_m, "Play")
+func (_m *MockGamer) Play(stdin *bufio.Reader, printer print.Printer) {
+	_m.ctrl.Call(_m, "Play", stdin, printer)
 }
 
-func (_mr *_MockGamerRecorder) Play() *gomock.Call {
-	return _mr.mock.ctrl.RecordCall(_mr.mock, "Play")
+func (_mr *_MockGamerRecorder) Play(arg0, arg1 interface{}) *gomock.Call {
+	return _mr.mock.ctrl.RecordCall(_mr.mock, "Play", arg0, arg1)
 }
