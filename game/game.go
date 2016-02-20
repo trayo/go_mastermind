@@ -20,4 +20,5 @@ func NewGamer() I.Gamer {
 
 func (g Gamer) Play(stdin *bufio.Reader, printer print.Printer) {
 	printer.EnterAGuess()
+	printer.ClearScreen()
 }
