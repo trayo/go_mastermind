@@ -48,12 +48,20 @@ func (p Printer) Instructions() {
 	fmt.Fprintln(p.writer, "Good luck!\n")
 }
 
+func (p Printer) UnknownMainCommand() {
+	fmt.Fprintln(p.writer, "Unknown command!")
+	fmt.Fprintln(p.writer, "Valid commands are:")
+	fmt.Fprintln(p.writer, "'p' or 'play'")
+	fmt.Fprintln(p.writer, "'i' or 'instructions'")
+	fmt.Fprintln(p.writer, "'q' or 'quit'\n")
+}
+
 func (p Printer) UnknownCommand() {
 	fmt.Fprintln(p.writer, "Unknown command! Please try again ...\n")
 }
 
 func (p Printer) WhatsNext() {
-	fmt.Fprintln(p.writer, "Would you like to (p)lay read the (i)nstructions or (q)uit?")
+	fmt.Fprintln(p.writer, "Would you like to play, read the instructions or quit?")
 	fmt.Fprint(p.writer, "> ")
 }
 
