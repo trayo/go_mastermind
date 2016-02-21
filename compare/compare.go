@@ -14,16 +14,14 @@ type Compare struct {
 func NewCompare(args ...string) *Compare {
 	var code string
 
-	if len(args) > 1 {
-		code = args[1]
+	if len(args) >= 1 {
+		code = args[0]
 	} else {
 		code = code_maker.Generate()
 	}
 
 	return &Compare{
-		CorrectPositions: "",
-		CorrectColors:    "",
-		Code:             code,
+		Code: code,
 	}
 }
 

@@ -28,11 +28,10 @@ var _ = Describe("comparing guesses and codes", func() {
 	})
 
 	It("can compare new guesses", func() {
-		code := "ybgr"
-		guess := "rybg"
-		comp = compare.NewCompare(guess, code)
+		var code = "ybgr"
+		comp = compare.NewCompare(code)
 
-		comp.Guess("ybgr")
+		comp.Guess(code)
 
 		Expect(comp.CorrectPositions).To(Equal("4"))
 		Expect(comp.CorrectColors).To(Equal("4"))
