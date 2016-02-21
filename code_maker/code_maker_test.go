@@ -24,23 +24,17 @@ var _ = Describe("code maker", func() {
 		Expect(len(code)).To(Equal(4))
 	})
 
-	It("generates a new code every time", func() {
-		code = Generate()
-		code = Generate()
-		code = Generate()
+	Context("using a specified code", func() {
+		It("accepts a specific code", func() {
+			code = Generate("rrrr")
 
-		Expect(len(code)).To(Equal(4))
-	})
+			Expect(code).To(Equal("rrrr"))
+		})
 
-	It("accepts a specific code", func() {
-		code = Generate("rrrr")
+		It("ignores extra arguments", func() {
+			code = Generate("yyyy", "bbbb", "gggg")
 
-		Expect(code).To(Equal("rrrr"))
-	})
-
-	It("ignores extra arguments", func() {
-		code = Generate("yyyy", "bbbb", "gggg")
-
-		Expect(code).To(Equal("yyyy"))
+			Expect(code).To(Equal("yyyy"))
+		})
 	})
 })
