@@ -34,6 +34,10 @@ func (g Gamer) Play(args ...string) {
 	in = input.GetInput(g.stdin)
 
 	for !input.WantsToQuit(in) {
+		switch {
+		default:
+			g.printer.UnknownGameCommand()
+		}
 
 		g.printer.EnterAGuess()
 		in = input.GetInput(g.stdin)

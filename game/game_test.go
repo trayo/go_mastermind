@@ -64,6 +64,17 @@ var _ = Describe("playing a game", func() {
 
 			Eventually(buffer).Should(gbytes.Say("Thanks for playing"))
 		})
+	})
 
+	Context("with invalid input", func() {
+		It("will ask for valid input", func() {
+			commandSequence("this wont work", "q")
+
+			gamer.Play()
+
+			Eventually(buffer).Should(gbytes.Say("Unknown command"))
+			Eventually(buffer).Should(gbytes.Say("Valid commands are"))
+			Eventually(buffer).Should(gbytes.Say("Thanks for playing"))
+		})
 	})
 })

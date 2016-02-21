@@ -56,8 +56,11 @@ func (p Printer) UnknownMainCommand() {
 	fmt.Fprintln(p.writer, "'q' or 'quit'\n")
 }
 
-func (p Printer) UnknownCommand() {
-	fmt.Fprintln(p.writer, "Unknown command! Please try again ...\n")
+func (p Printer) UnknownGameCommand() {
+	fmt.Fprintln(p.writer, "Unknown command!")
+	fmt.Fprintln(p.writer, "Valid commands are:")
+	fmt.Fprintln(p.writer, "A four letter guess, like 'rrrr', or")
+	fmt.Fprintln(p.writer, "'q' or 'quit'\n")
 }
 
 func (p Printer) WhatsNext() {
