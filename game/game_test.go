@@ -34,13 +34,18 @@ var _ = Describe("playing a game", func() {
 
 		printer = print.NewPrinter(buffer)
 
-		gamer = NewGamer()
+		gamer = NewGamer(stdinReader, printer)
 	})
 
-	It("asks for a guess", func() {
 		gamer.Play(stdinReader, printer)
+	Context("starting a game", func() {
 
 		Eventually(buffer).Should(gbytes.Say("Enter a guess"))
+		It("asks for a guess", func() {
+			gamer.Play()
+
+			Eventually(buffer).Should(gbytes.Say("Enter a guess"))
+		})
 	})
 
 	// It("can make a guess", func() {

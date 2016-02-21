@@ -12,13 +12,20 @@ var (
 	reader = *bufio.NewReader(os.Stdin)
 )
 
-type Gamer struct{}
-
-func NewGamer() I.Gamer {
-	return Gamer{}
+type Gamer struct {
+	stdin   *bufio.Reader
+	printer print.Printer
 }
 
-func (g Gamer) Play(stdin *bufio.Reader, printer print.Printer) {
-	printer.EnterAGuess()
-	printer.ClearScreen()
+func NewGamer(stdin *bufio.Reader, printer print.Printer) I.Gamer {
+	return Gamer{
+		stdin:   stdin,
+		printer: printer,
+	}
+}
+
+func (g Gamer) Play() {
+	g.printer.GameStart()
+	g.printer.EnterAGuess()
+	g.printer.ClearScreen()
 }

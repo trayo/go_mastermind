@@ -13,7 +13,7 @@ import (
 func main() {
 	stdin := bufio.NewReader(os.Stdin)
 	printer := print.NewPrinter(os.Stdout)
-	gamer := game.NewGamer()
+	gamer := game.NewGamer(stdin, printer)
 	Run(gamer, stdin, printer)
 }
 
@@ -32,10 +32,10 @@ func Run(gamer I.Gamer, stdin *bufio.Reader, printer print.Printer) {
 			printer.Instructions()
 		case input.WantsToPlay(in):
 			printer.ClearScreen()
-			gamer.Play(stdin, printer)
+			gamer.Play()
 			printer.ThanksForPlaying()
 		default:
-			printer.UnknownCommand()
+			printer.UnknownMainCommand()
 		}
 
 		printer.WhatsNext()

@@ -72,7 +72,7 @@ var _ = Describe("Main CLI interaction", func() {
 		It("can start a game", func() {
 			commandSequence("p", "q")
 
-			mockGamer.EXPECT().Play(stdinReader, printer)
+			mockGamer.EXPECT().Play()
 
 			main.Run(mockGamer, stdinReader, printer)
 		})
