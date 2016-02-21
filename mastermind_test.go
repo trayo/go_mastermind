@@ -44,7 +44,7 @@ var _ = Describe("Main CLI interaction", func() {
 
 			main.Run(mockGamer, stdinReader, printer)
 
-			Eventually(buffer).Should(gbytes.Say("Welcome"))
+			Eventually(buffer).Should(gbytes.Say("Would you like to play"))
 			Eventually(buffer).Should(gbytes.Say("byeee"))
 		})
 
@@ -53,7 +53,7 @@ var _ = Describe("Main CLI interaction", func() {
 
 			main.Run(mockGamer, stdinReader, printer)
 
-			Eventually(buffer).Should(gbytes.Say("Welcome"))
+			Eventually(buffer).Should(gbytes.Say("Would you like to play"))
 			Eventually(buffer).Should(gbytes.Say("generate a sequence"))
 			Eventually(buffer).Should(gbytes.Say("byeee"))
 		})
@@ -63,7 +63,7 @@ var _ = Describe("Main CLI interaction", func() {
 
 			main.Run(mockGamer, stdinReader, printer)
 
-			Eventually(buffer).Should(gbytes.Say("Welcome"))
+			Eventually(buffer).Should(gbytes.Say("Would you like to play"))
 			Eventually(buffer).Should(gbytes.Say("generate a sequence"))
 			Eventually(buffer).Should(gbytes.Say("generate a sequence"))
 			Eventually(buffer).Should(gbytes.Say("byeee"))
