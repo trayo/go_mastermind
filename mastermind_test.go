@@ -38,7 +38,7 @@ var _ = Describe("Main CLI interaction", func() {
 		printer = print.NewPrinter(buffer)
 	})
 
-	Context("when providing input", func() {
+	Context("when providing valid input", func() {
 		It("can quit the game", func() {
 			commandSequence("q")
 
@@ -75,6 +75,19 @@ var _ = Describe("Main CLI interaction", func() {
 			mockGamer.EXPECT().Play()
 
 			main.Run(mockGamer, stdinReader, printer)
+		})
+	})
+
+	Context("when providing invalid input", func() {
+		It("will ask for valid input", func() {
+			commandSequence("this wont work", "q")
+
+			main.Run(mockGamer, stdinReader, printer)
+
+			Eventually(buffer).Should(gbytes.Say("Unknown command"))
+			Eventually(buffer).Should(gbytes.Say("Valid commands are"))
+			Eventually(buffer).Should(gbytes.Say("Would you like to play"))
+			Eventually(buffer).Should(gbytes.Say("byeee"))
 		})
 	})
 })
