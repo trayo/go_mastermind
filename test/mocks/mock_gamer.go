@@ -28,10 +28,14 @@ func (_m *MockGamer) EXPECT() *_MockGamerRecorder {
 	return _m.recorder
 }
 
-func (_m *MockGamer) Play() {
-	_m.ctrl.Call(_m, "Play")
+func (_m *MockGamer) Play(args ...string) {
+	_s := []interface{}{}
+	for _, _x := range args {
+		_s = append(_s, _x)
+	}
+	_m.ctrl.Call(_m, "Play", _s...)
 }
 
-func (_mr *_MockGamerRecorder) Play() *gomock.Call {
-	return _mr.mock.ctrl.RecordCall(_mr.mock, "Play")
+func (_mr *_MockGamerRecorder) Play(arg0 ...interface{}) *gomock.Call {
+	return _mr.mock.ctrl.RecordCall(_mr.mock, "Play", arg0...)
 }

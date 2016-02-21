@@ -24,7 +24,7 @@ func NewGamer(stdin *bufio.Reader, printer print.Printer) I.Gamer {
 	}
 }
 
-func (g Gamer) Play() {
+func (g Gamer) Play(args ...string) {
 	g.printer.GameStart()
 	g.printer.EnterAGuess()
 	g.printer.ClearScreen()

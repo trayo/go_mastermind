@@ -1,5 +1,5 @@
 package interfaces
 
 type Gamer interface {
-	Play()
+	Play(args ...string)
 }
