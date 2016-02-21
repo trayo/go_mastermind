@@ -3,6 +3,7 @@ package game_test
 import (
 	"bufio"
 	"bytes"
+	"strings"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -16,14 +17,14 @@ import (
 var _ = Describe("playing a game", func() {
 
 	var (
-		stdin       *bytes.Buffer
-		stdinReader *bufio.Reader
-		buffer      *gbytes.Buffer
-		printer     print.Printer
-		gamer       I.Gamer
-		// commandSequence = func(args ...string) {
-		// 	stdin.WriteString(strings.Join(args, "\n"))
-		// }
+		stdin           *bytes.Buffer
+		stdinReader     *bufio.Reader
+		buffer          *gbytes.Buffer
+		printer         print.Printer
+		gamer           I.Gamer
+		commandSequence = func(args ...string) {
+			stdin.WriteString(strings.Join(args, "\n"))
+		}
 	)
 
 	BeforeEach(func() {
@@ -39,20 +40,30 @@ var _ = Describe("playing a game", func() {
 
 	Context("starting a game", func() {
 		It("says it generates a code", func() {
+			commandSequence("q")
+
 			gamer.Play()
 
 			Eventually(buffer).Should(gbytes.Say("I have generated a random code"))
 		})
 
 		It("asks for a guess", func() {
+			commandSequence("q")
+
 			gamer.Play()
 
 			Eventually(buffer).Should(gbytes.Say("Enter a guess"))
 		})
 	})
 
-	// It("can make a guess", func() {
-	// 	commandSequence("")
-	// 	Expect(true).To(Equal(true))
-	// })
+	Context("with valid input", func() {
+		It("can quit the game", func() {
+			commandSequence("q")
+
+			gamer.Play()
+
+			Eventually(buffer).Should(gbytes.Say("Thanks for playing"))
+		})
+
+	})
 })

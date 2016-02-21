@@ -33,7 +33,6 @@ func Run(gamer I.Gamer, stdin *bufio.Reader, printer print.Printer) {
 		case input.WantsToPlay(in):
 			printer.ClearScreen()
 			gamer.Play()
-			printer.ThanksForPlaying()
 		default:
 			printer.UnknownMainCommand()
 		}

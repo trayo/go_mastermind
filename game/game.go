@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"os"
 
+	"github.com/trayo/go_mastermind/input"
 	I "github.com/trayo/go_mastermind/interfaces"
 	"github.com/trayo/go_mastermind/print"
 )
@@ -25,7 +26,18 @@ func NewGamer(stdin *bufio.Reader, printer print.Printer) I.Gamer {
 }
 
 func (g Gamer) Play(args ...string) {
+	var (
+		in string
+	)
 	g.printer.GameStart()
 	g.printer.EnterAGuess()
-	g.printer.ClearScreen()
+	in = input.GetInput(g.stdin)
+
+	for !input.WantsToQuit(in) {
+
+		g.printer.EnterAGuess()
+		in = input.GetInput(g.stdin)
+	}
+
+	g.printer.ThanksForPlaying()
 }
