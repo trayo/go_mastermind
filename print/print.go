@@ -68,7 +68,7 @@ func (p Printer) WhatsNext() {
 func (p Printer) GameStart() {
 	fmt.Fprintln(p.writer, "I have generated a random code four characters in length using the letters:")
 	fmt.Fprintf(p.writer, colorize("'r', 'g', 'b' and 'y'"))
-	fmt.Fprintln(p.writer, "\nTry and guess the code by providing input like: %s", colorize("'rrrr'"))
+	fmt.Fprintf(p.writer, "\nTry and guess the code by providing input like: %s\n", colorize("'rrrr'"))
 }
 
 func (p Printer) EnterAGuess() {
