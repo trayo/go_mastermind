@@ -4,107 +4,130 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	"github.com/trayo/go_mastermind/check"
+	. "github.com/trayo/go_mastermind/check"
 )
 
 var (
 	code   string
 	guess  string
 	answer int
+	comp   *Check
 )
 
-var _ = Describe("checking postions", func() {
+var _ = Describe("Check", func() {
 
-	It("can check for 0 correct positions", func() {
-		code = "gggg"
-		guess = "bbbb"
-
-		answer = check.Positions(guess, code)
-
-		Expect(answer).To(Equal(0))
+	BeforeEach(func() {
+		comp = &Check{}
 	})
 
-	It("can check for 1 correct position", func() {
-		code = "grgg"
-		guess = "rrrr"
+	It("can be initialized empty", func() {
+		comp = NewCheck()
 
-		answer = check.Positions(guess, code)
-
-		Expect(answer).To(Equal(1))
+		Expect(comp.CorrectPositions).To(Equal(0))
+		Expect(comp.CorrectColors).To(Equal(0))
 	})
 
-	It("can check for 2 correct positions", func() {
-		code = "ybyb"
-		guess = "yyyy"
+	It("can compare new guesses", func() {
+		code := "ybgr"
+		comp = NewCheck(code)
 
-		answer = check.Positions(guess, code)
+		comp.Guess(code)
 
-		Expect(answer).To(Equal(2))
+		Expect(comp.CorrectPositions).To(Equal(4))
+		Expect(comp.CorrectColors).To(Equal(4))
 	})
 
-	It("can check for 3 correct positions", func() {
-		code = "gbgg"
-		guess = "gggg"
+	Context("checking positions", func() {
+		It("can check for 0 correct positions", func() {
+			code = "gggg"
+			guess = "bbbb"
 
-		answer = check.Positions(guess, code)
+			answer = Positions(guess, code)
 
-		Expect(answer).To(Equal(3))
+			Expect(answer).To(Equal(0))
+		})
+
+		It("can check for 1 correct position", func() {
+			code = "grgg"
+			guess = "rrrr"
+
+			answer = Positions(guess, code)
+
+			Expect(answer).To(Equal(1))
+		})
+
+		It("can check for 2 correct positions", func() {
+			code = "ybyb"
+			guess = "yyyy"
+
+			answer = Positions(guess, code)
+
+			Expect(answer).To(Equal(2))
+		})
+
+		It("can check for 3 correct positions", func() {
+			code = "gbgg"
+			guess = "gggg"
+
+			answer = Positions(guess, code)
+
+			Expect(answer).To(Equal(3))
+		})
+
+		It("can check for all correct positions", func() {
+			code = "gggg"
+			guess = "gggg"
+
+			answer = Positions(guess, code)
+
+			Expect(answer).To(Equal(4))
+		})
 	})
 
-	It("can check for all correct positions", func() {
-		code = "gggg"
-		guess = "gggg"
+	Context("checking colors", func() {
+		It("can check for 0 correct colors", func() {
+			code = "gggg"
+			guess = "rrrr"
 
-		answer = check.Positions(guess, code)
+			answer = Colors(guess, code)
 
-		Expect(answer).To(Equal(4))
-	})
-})
+			Expect(answer).To(Equal(0))
+		})
 
-var _ = Describe("checking colors", func() {
+		It("can check for 1 correct color", func() {
+			code = "bggg"
+			guess = "bbbb"
 
-	It("can check for 0 correct colors", func() {
-		code = "gggg"
-		guess = "rrrr"
+			answer = Colors(guess, code)
 
-		answer = check.Colors(guess, code)
+			Expect(answer).To(Equal(1))
+		})
 
-		Expect(answer).To(Equal(0))
-	})
+		It("can check for 2 correct colors", func() {
+			code = "rbrb"
+			guess = "rrrr"
 
-	It("can check for 1 correct color", func() {
-		code = "bggg"
-		guess = "bbbb"
+			answer = Colors(guess, code)
 
-		answer = check.Colors(guess, code)
+			Expect(answer).To(Equal(2))
+		})
 
-		Expect(answer).To(Equal(1))
-	})
+		It("can check for 3 correct colors", func() {
+			code = "ggyg"
+			guess = "gggg"
 
-	It("can check for 2 correct colors", func() {
-		code = "rbrb"
-		guess = "rrrr"
+			answer = Colors(guess, code)
 
-		answer = check.Colors(guess, code)
+			Expect(answer).To(Equal(3))
+		})
 
-		Expect(answer).To(Equal(2))
-	})
+		It("can check for all correct colors", func() {
+			code = "rybg"
+			guess = "gbyr"
 
-	It("can check for 3 correct colors", func() {
-		code = "ggyg"
-		guess = "gggg"
+			answer = Colors(guess, code)
 
-		answer = check.Colors(guess, code)
-
-		Expect(answer).To(Equal(3))
-	})
-
-	It("can check for all correct colors", func() {
-		code = "rybg"
-		guess = "gbyr"
-
-		answer = check.Colors(guess, code)
-
-		Expect(answer).To(Equal(4))
+			Expect(answer).To(Equal(4))
+		})
 	})
 })

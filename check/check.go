@@ -1,11 +1,39 @@
 package check
 
-import "github.com/trayo/go_mastermind/unique"
+import (
+	"github.com/trayo/go_mastermind/code_maker"
+	"github.com/trayo/go_mastermind/unique"
+)
 
 var (
 	correctPositions int
 	correctColors    int
 )
+
+type Check struct {
+	CorrectPositions int
+	CorrectColors    int
+	Code             string
+}
+
+func NewCheck(args ...string) *Check {
+	var code string
+
+	if len(args) >= 1 {
+		code = args[0]
+	} else {
+		code = code_maker.Generate()
+	}
+
+	return &Check{
+		Code: code,
+	}
+}
+
+func (c *Check) Guess(guess string) {
+	c.CorrectPositions = Positions(guess, c.Code)
+	c.CorrectColors = Colors(guess, c.Code)
+}
 
 func Positions(guess, code string) int {
 	correctPositions = 0
