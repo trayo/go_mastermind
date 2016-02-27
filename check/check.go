@@ -13,7 +13,7 @@ var (
 type Check struct {
 	CorrectPositions int
 	CorrectColors    int
-	Code             string
+	code             string
 }
 
 func NewCheck(args ...string) *Check {
@@ -26,13 +26,13 @@ func NewCheck(args ...string) *Check {
 	}
 
 	return &Check{
-		Code: code,
+		code: code,
 	}
 }
 
 func (c *Check) Guess(guess string) {
-	c.CorrectPositions = Positions(guess, c.Code)
-	c.CorrectColors = Colors(guess, c.Code)
+	c.CorrectPositions = Positions(guess, c.code)
+	c.CorrectColors = Colors(guess, c.code)
 }
 
 func Positions(guess, code string) int {
