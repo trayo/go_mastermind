@@ -1,17 +1,13 @@
 package check
 
-import (
-	"fmt"
-
-	"github.com/trayo/go_mastermind/unique"
-)
+import "github.com/trayo/go_mastermind/unique"
 
 var (
 	correctPositions int
 	correctColors    int
 )
 
-func Positions(guess, code string) string {
+func Positions(guess, code string) int {
 	correctPositions = 0
 
 	for i, letter := range guess {
@@ -20,10 +16,10 @@ func Positions(guess, code string) string {
 		}
 	}
 
-	return fmt.Sprintf("%d", correctPositions)
+	return correctPositions
 }
 
-func Colors(guess, code string) string {
+func Colors(guess, code string) int {
 	correctColors = 0
 
 	uniqueGuess := unique.RemoveDuplicateLetters(guess)
@@ -36,5 +32,5 @@ func Colors(guess, code string) string {
 		}
 	}
 
-	return fmt.Sprintf("%d", correctColors)
+	return correctColors
 }

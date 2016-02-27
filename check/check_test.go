@@ -10,7 +10,7 @@ import (
 var (
 	code   string
 	guess  string
-	answer string
+	answer int
 )
 
 var _ = Describe("checking postions", func() {
@@ -21,7 +21,7 @@ var _ = Describe("checking postions", func() {
 
 		answer = check.Positions(guess, code)
 
-		Expect(answer).To(Equal("0"))
+		Expect(answer).To(Equal(0))
 	})
 
 	It("can check for 1 correct position", func() {
@@ -30,7 +30,7 @@ var _ = Describe("checking postions", func() {
 
 		answer = check.Positions(guess, code)
 
-		Expect(answer).To(Equal("1"))
+		Expect(answer).To(Equal(1))
 	})
 
 	It("can check for 2 correct positions", func() {
@@ -39,7 +39,7 @@ var _ = Describe("checking postions", func() {
 
 		answer = check.Positions(guess, code)
 
-		Expect(answer).To(Equal("2"))
+		Expect(answer).To(Equal(2))
 	})
 
 	It("can check for 3 correct positions", func() {
@@ -48,7 +48,7 @@ var _ = Describe("checking postions", func() {
 
 		answer = check.Positions(guess, code)
 
-		Expect(answer).To(Equal("3"))
+		Expect(answer).To(Equal(3))
 	})
 
 	It("can check for all correct positions", func() {
@@ -57,7 +57,7 @@ var _ = Describe("checking postions", func() {
 
 		answer = check.Positions(guess, code)
 
-		Expect(answer).To(Equal("4"))
+		Expect(answer).To(Equal(4))
 	})
 })
 
@@ -69,7 +69,7 @@ var _ = Describe("checking colors", func() {
 
 		answer = check.Colors(guess, code)
 
-		Expect(answer).To(Equal("0"))
+		Expect(answer).To(Equal(0))
 	})
 
 	It("can check for 1 correct color", func() {
@@ -78,7 +78,7 @@ var _ = Describe("checking colors", func() {
 
 		answer = check.Colors(guess, code)
 
-		Expect(answer).To(Equal("1"))
+		Expect(answer).To(Equal(1))
 	})
 
 	It("can check for 2 correct colors", func() {
@@ -87,7 +87,7 @@ var _ = Describe("checking colors", func() {
 
 		answer = check.Colors(guess, code)
 
-		Expect(answer).To(Equal("2"))
+		Expect(answer).To(Equal(2))
 	})
 
 	It("can check for 3 correct colors", func() {
@@ -96,7 +96,7 @@ var _ = Describe("checking colors", func() {
 
 		answer = check.Colors(guess, code)
 
-		Expect(answer).To(Equal("3"))
+		Expect(answer).To(Equal(3))
 	})
 
 	It("can check for all correct colors", func() {
@@ -105,6 +105,6 @@ var _ = Describe("checking colors", func() {
 
 		answer = check.Colors(guess, code)
 
-		Expect(answer).To(Equal("4"))
+		Expect(answer).To(Equal(4))
 	})
 })

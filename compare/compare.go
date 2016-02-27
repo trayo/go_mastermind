@@ -6,8 +6,8 @@ import (
 )
 
 type Compare struct {
-	CorrectPositions string
-	CorrectColors    string
+	CorrectPositions int
+	CorrectColors    int
 	Code             string
 }
 
