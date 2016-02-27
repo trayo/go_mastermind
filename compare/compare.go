@@ -25,7 +25,7 @@ func NewCompare(args ...string) *Compare {
 	}
 }
 
-func (self *Compare) Guess(guess string) {
-	self.CorrectPositions = check.Positions(guess, self.Code)
-	self.CorrectColors = check.Colors(guess, self.Code)
+func (c *Compare) Guess(guess string) {
+	c.CorrectPositions = check.Positions(guess, c.Code)
+	c.CorrectColors = check.Colors(guess, c.Code)
 }
