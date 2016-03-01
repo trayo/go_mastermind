@@ -32,7 +32,7 @@ func NewCheck(args ...string) *Check {
 
 func (c *Check) Guess(guess string) {
 	c.CorrectPositions = findPositions(guess, c.code)
-	c.CorrectColors = Colors(guess, c.code)
+	c.CorrectColors = findColors(guess, c.code)
 }
 
 func findPositions(guess, code string) int {
@@ -47,7 +47,7 @@ func findPositions(guess, code string) int {
 	return correctPositions
 }
 
-func Colors(guess, code string) int {
+func findColors(guess, code string) int {
 	correctColors = 0
 
 	uniqueGuess := unique.RemoveDuplicateLetters(guess)
