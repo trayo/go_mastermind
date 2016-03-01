@@ -31,11 +31,11 @@ func NewCheck(args ...string) *Check {
 }
 
 func (c *Check) Guess(guess string) {
-	c.CorrectPositions = Positions(guess, c.code)
+	c.CorrectPositions = findPositions(guess, c.code)
 	c.CorrectColors = Colors(guess, c.code)
 }
 
-func Positions(guess, code string) int {
+func findPositions(guess, code string) int {
 	correctPositions = 0
 
 	for i, letter := range guess {
