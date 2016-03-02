@@ -2,6 +2,7 @@ package input
 
 import (
 	"bufio"
+	"regexp"
 	"strings"
 )
 
@@ -30,4 +31,9 @@ func WantsToPlay(s string) bool {
 		return true
 	}
 	return false
+}
+
+func Valid(s string) bool {
+	result, _ := regexp.MatchString("^[rgby]{4}$", s)
+	return result
 }

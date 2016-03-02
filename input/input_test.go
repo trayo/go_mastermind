@@ -31,43 +31,69 @@ var _ = Describe("Input", func() {
 
 	Context("quit", func() {
 		It("can check for q", func() {
-			s := "q"
+			input := "q"
 
-			Expect(WantsToQuit(s)).To(BeTrue())
+			Expect(WantsToQuit(input)).To(BeTrue())
 		})
 
 		It("can check for quit", func() {
-			s := "quit"
+			input := "quit"
 
-			Expect(WantsToQuit(s)).To(BeTrue())
+			Expect(WantsToQuit(input)).To(BeTrue())
 		})
 	})
 
 	Context("instructions", func() {
 		It("can check for i", func() {
-			s := "i"
+			input := "i"
 
-			Expect(WantsInstructions(s)).To(BeTrue())
+			Expect(WantsInstructions(input)).To(BeTrue())
 		})
 
 		It("can check for instructions", func() {
-			s := "instructions"
+			input := "instructions"
 
-			Expect(WantsInstructions(s)).To(BeTrue())
+			Expect(WantsInstructions(input)).To(BeTrue())
 		})
 	})
 
 	Context("play", func() {
 		It("can check for p", func() {
-			s := "p"
+			input := "p"
 
-			Expect(WantsToPlay(s)).To(BeTrue())
+			Expect(WantsToPlay(input)).To(BeTrue())
 		})
 
 		It("can check for play", func() {
-			s := "play"
+			input := "play"
 
-			Expect(WantsToPlay(s)).To(BeTrue())
+			Expect(WantsToPlay(input)).To(BeTrue())
+		})
+	})
+
+	Context("checking for valid game input", func() {
+		It("can check correct length and colors", func() {
+			input := "rgby"
+
+			Expect(Valid(input)).To(BeTrue())
+		})
+
+		It("can check invalid colors", func() {
+			input := "nope"
+
+			Expect(Valid(input)).To(BeFalse())
+		})
+
+		It("can check input that's too long", func() {
+			input := "thisistoolong"
+
+			Expect(Valid(input)).To(BeFalse())
+		})
+
+		It("can check input that's too short", func() {
+			input := "no"
+
+			Expect(Valid(input)).To(BeFalse())
 		})
 	})
 })
