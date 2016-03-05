@@ -35,6 +35,10 @@ func (c *Check) Guess(guess string) {
 	c.CorrectColors = findColors(guess, c.code)
 }
 
+func (c *Check) Won() bool {
+	return c.CorrectPositions == 4 && c.CorrectColors == 4
+}
+
 func findPositions(guess, code string) int {
 	correctPositions = 0
 

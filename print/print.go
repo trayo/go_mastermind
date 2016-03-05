@@ -84,6 +84,10 @@ func (p Printer) ThanksForPlaying() {
 	fmt.Fprintln(p.writer, "Remember, winners don't do drugs.\n")
 }
 
+func (p Printer) YouWon() {
+	fmt.Fprintln(p.writer, "You have guessed the code!")
+}
+
 func (p Printer) ClearScreen() {
 	c := exec.Command("clear")
 	c.Stdout = p.writer

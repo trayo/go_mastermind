@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"os"
 
+	"github.com/trayo/go_mastermind/check"
 	"github.com/trayo/go_mastermind/input"
 	I "github.com/trayo/go_mastermind/interfaces"
 	"github.com/trayo/go_mastermind/print"
@@ -27,20 +28,34 @@ func NewGamer(stdin *bufio.Reader, printer print.Printer) I.Gamer {
 
 func (g Gamer) Play(args ...string) {
 	var (
-		in string
+		in      string
+		checker *check.Check
 	)
+
+	if len(args) > 0 {
+		checker = check.NewCheck(args[0])
+	} else {
+		checker = check.NewCheck()
+	}
+
 	g.printer.GameStart()
-	g.printer.EnterAGuess()
-	in = input.GetInput(g.stdin)
 
-	for !input.WantsToQuit(in) {
-		switch {
-		default:
-			g.printer.UnknownGameCommand()
-		}
-
+	continuePlaying := true
+	for continuePlaying {
 		g.printer.EnterAGuess()
 		in = input.GetInput(g.stdin)
+		switch {
+		case input.WantsToQuit(in):
+			continuePlaying = false
+		case !input.Valid(in):
+			g.printer.UnknownGameCommand()
+		default:
+			checker.Guess(in)
+			if checker.Won() {
+				g.printer.YouWon()
+				continuePlaying = false
+			}
+		}
 	}
 
 	g.printer.ThanksForPlaying()

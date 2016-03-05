@@ -38,42 +38,40 @@ var _ = Describe("playing a game", func() {
 		gamer = NewGamer(stdinReader, printer)
 	})
 
-	Context("starting a game", func() {
-		It("says it generates a code", func() {
-			commandSequence("q")
-
-			gamer.Play()
-
-			Eventually(buffer).Should(gbytes.Say("I have generated a random code"))
-		})
-
-		It("asks for a guess", func() {
-			commandSequence("q")
-
-			gamer.Play()
-
-			Eventually(buffer).Should(gbytes.Say("Enter a guess"))
-		})
-	})
-
-	Context("with valid input", func() {
-		It("can quit the game", func() {
-			commandSequence("q")
-
-			gamer.Play()
-
-			Eventually(buffer).Should(gbytes.Say("Thanks for playing"))
-		})
-	})
-
 	Context("with invalid input", func() {
 		It("will ask for valid input", func() {
-			commandSequence("this wont work", "q")
+			commandSequence("hoohah", "this wont work", "q")
 
 			gamer.Play()
 
 			Eventually(buffer).Should(gbytes.Say("Unknown command"))
 			Eventually(buffer).Should(gbytes.Say("Valid commands are"))
+			Eventually(buffer).Should(gbytes.Say("Unknown command"))
+			Eventually(buffer).Should(gbytes.Say("Valid commands are"))
+			Eventually(buffer).Should(gbytes.Say("Thanks for playing"))
+		})
+	})
+
+	Context("with valid input", func() {
+		It("starts up", func() {
+			commandSequence("q")
+
+			gamer.Play()
+
+			Eventually(buffer).Should(gbytes.Say("I have generated a random code"))
+			Eventually(buffer).Should(gbytes.Say("Enter a guess"))
+			Eventually(buffer).Should(gbytes.Say("Thanks for playing"))
+		})
+
+		It("can guess the correct code", func() {
+			code := "rrrr"
+			commandSequence("rrrr", "q")
+
+			gamer.Play(code)
+
+			Eventually(buffer).Should(gbytes.Say("I have generated a random code"))
+			Eventually(buffer).Should(gbytes.Say("Enter a guess"))
+			Eventually(buffer).Should(gbytes.Say("You have guessed the code!"))
 			Eventually(buffer).Should(gbytes.Say("Thanks for playing"))
 		})
 	})

@@ -35,6 +35,7 @@ var _ = Describe("Check", func() {
 
 		Expect(checker.CorrectPositions).To(Equal(4))
 		Expect(checker.CorrectColors).To(Equal(4))
+		Expect(checker.Won()).To(BeTrue())
 	})
 
 	Context("checking positions", func() {
