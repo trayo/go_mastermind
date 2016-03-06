@@ -97,6 +97,11 @@ func (p Printer) CorrectColorsAndPositions(colors int, positions int) {
 	fmt.Fprintf(p.writer, "You have %d correct colors and %d correct positions.\n\n", colors, positions)
 }
 
+func (p Printer) EnterCode() {
+	fmt.Fprintln(p.writer, "Enter a code:")
+	fmt.Fprint(p.writer, "> ")
+}
+
 func (p Printer) ClearScreen() {
 	c := exec.Command("clear")
 	c.Stdout = p.writer

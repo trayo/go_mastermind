@@ -33,6 +33,13 @@ func WantsToPlay(s string) bool {
 	return false
 }
 
+func SecretCode(s string) bool {
+	if s == "wow. such code. many secret." {
+		return true
+	}
+	return false
+}
+
 func Valid(s string) bool {
 	result, _ := regexp.MatchString("^[rgby]{4}$", s)
 	return result
