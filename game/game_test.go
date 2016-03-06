@@ -94,5 +94,23 @@ var _ = Describe("playing a game", func() {
 			Eventually(buffer).Should(gbytes.Say("3 correct colors"))
 			Eventually(buffer).Should(gbytes.Say("1 correct positions"))
 		})
+
+		It("says how many guesses it took", func() {
+			code := "rrrr"
+			commandSequence("gggg", "gggg", "rrrr", "q")
+
+			gamer.Play(code)
+
+			Eventually(buffer).Should(gbytes.Say("3 guesses"))
+		})
+
+		It("says guess for one guess", func() {
+			code := "rrrr"
+			commandSequence("rrrr", "q")
+
+			gamer.Play(code)
+
+			Eventually(buffer).Should(gbytes.Say("1 guess"))
+		})
 	})
 })

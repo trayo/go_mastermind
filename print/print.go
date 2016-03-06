@@ -84,12 +84,17 @@ func (p Printer) ThanksForPlaying() {
 	fmt.Fprintln(p.writer, "Remember, winners don't do drugs.\n")
 }
 
-func (p Printer) YouWon() {
+func (p Printer) YouWon(guesses int) {
 	fmt.Fprintln(p.writer, "You have guessed the code!")
+	if guesses == 1 {
+		fmt.Fprintf(p.writer, "It took you %d guess.\n\n", guesses)
+	} else {
+		fmt.Fprintf(p.writer, "It took you %d guesses.\n\n", guesses)
+	}
 }
 
 func (p Printer) CorrectColorsAndPositions(colors int, positions int) {
-	fmt.Fprintf(p.writer, "You have %d correct colors and %d correct positions.\n", colors, positions)
+	fmt.Fprintf(p.writer, "You have %d correct colors and %d correct positions.\n\n", colors, positions)
 }
 
 func (p Printer) ClearScreen() {

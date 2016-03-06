@@ -28,8 +28,10 @@ func NewGamer(stdin *bufio.Reader, printer print.Printer) I.Gamer {
 
 func (g Gamer) Play(args ...string) {
 	var (
-		in string
-		c  *check.Check
+		in              string
+		c               *check.Check
+		guesses         int
+		continuePlaying = true
 	)
 
 	if len(args) > 0 {
@@ -40,7 +42,6 @@ func (g Gamer) Play(args ...string) {
 
 	g.printer.GameStart()
 
-	continuePlaying := true
 	for continuePlaying {
 		g.printer.EnterAGuess()
 		in = input.GetInput(g.stdin)
@@ -52,8 +53,9 @@ func (g Gamer) Play(args ...string) {
 		default:
 			c.Guess(in)
 			g.printer.CorrectColorsAndPositions(c.CorrectColors, c.CorrectPositions)
+			guesses++
 			if c.Won() {
-				g.printer.YouWon()
+				g.printer.YouWon(guesses)
 				continuePlaying = false
 			}
 		}
