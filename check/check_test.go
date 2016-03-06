@@ -78,6 +78,16 @@ var _ = Describe("Check", func() {
 
 			Expect(checker.CorrectPositions).To(Equal(3))
 		})
+
+		It("can check for 4 correct positions", func() {
+			code = "gbrr"
+			guess = "gbrr"
+			checker = NewCheck(code)
+
+			checker.Guess(guess)
+
+			Expect(checker.CorrectPositions).To(Equal(4))
+		})
 	})
 
 	Context("checking colors", func() {
@@ -101,9 +111,19 @@ var _ = Describe("Check", func() {
 			Expect(checker.CorrectColors).To(Equal(1))
 		})
 
-		It("can check for 2 correct colors", func() {
-			code = "rbrb"
+		It("can check for 1 correct colors", func() {
+			code = "rrbb"
 			guess = "rrrr"
+			checker = NewCheck(code)
+
+			checker.Guess(guess)
+
+			Expect(checker.CorrectColors).To(Equal(1))
+		})
+
+		It("can check for 2 correct colors", func() {
+			code = "ggyb"
+			guess = "bggr"
 			checker = NewCheck(code)
 
 			checker.Guess(guess)
@@ -111,9 +131,9 @@ var _ = Describe("Check", func() {
 			Expect(checker.CorrectColors).To(Equal(2))
 		})
 
-		It("can check for 3 correct colors", func() {
-			code = "ggyg"
-			guess = "gggg"
+		It("counts duplicate colors as one element", func() {
+			code = "rgyg"
+			guess = "ygrg"
 			checker = NewCheck(code)
 
 			checker.Guess(guess)

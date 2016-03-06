@@ -88,6 +88,10 @@ func (p Printer) YouWon() {
 	fmt.Fprintln(p.writer, "You have guessed the code!")
 }
 
+func (p Printer) CorrectColorsAndPositions(colors int, positions int) {
+	fmt.Fprintf(p.writer, "You have %d correct colors and %d correct positions.\n", colors, positions)
+}
+
 func (p Printer) ClearScreen() {
 	c := exec.Command("clear")
 	c.Stdout = p.writer

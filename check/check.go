@@ -5,11 +5,6 @@ import (
 	"github.com/trayo/go_mastermind/unique"
 )
 
-var (
-	correctPositions int
-	correctColors    int
-)
-
 type Check struct {
 	CorrectPositions int
 	CorrectColors    int
@@ -36,11 +31,11 @@ func (c *Check) Guess(guess string) {
 }
 
 func (c *Check) Won() bool {
-	return c.CorrectPositions == 4 && c.CorrectColors == 4
+	return c.CorrectPositions == 4
 }
 
 func findPositions(guess, code string) int {
-	correctPositions = 0
+	correctPositions := 0
 
 	for i, letter := range guess {
 		if uint8(letter) == code[i] {
@@ -52,14 +47,14 @@ func findPositions(guess, code string) int {
 }
 
 func findColors(guess, code string) int {
-	correctColors = 0
-
 	uniqueGuess := unique.RemoveDuplicateLetters(guess)
+	uniqueCode := unique.RemoveDuplicateLetters(code)
 
+	var correctColors int
 	for _, guessLetter := range uniqueGuess {
-		for _, codeLetter := range code {
+		for _, codeLetter := range uniqueCode {
 			if guessLetter == codeLetter {
-				correctColors += 1
+				correctColors++
 			}
 		}
 	}
