@@ -2,6 +2,7 @@ package input
 
 import (
 	"bufio"
+	"os"
 	"regexp"
 	"strings"
 )
@@ -34,7 +35,7 @@ func WantsToPlay(s string) bool {
 }
 
 func SecretCode(s string) bool {
-	if s == "wow. such code. many secret." {
+	if s == os.Getenv("MASTERMIND_SECRET") {
 		return true
 	}
 	return false

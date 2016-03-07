@@ -3,6 +3,7 @@ package main_test
 import (
 	"bufio"
 	"bytes"
+	"os"
 	"strings"
 
 	. "github.com/onsi/ginkgo"
@@ -73,6 +74,18 @@ var _ = Describe("Main CLI interaction", func() {
 			commandSequence("p", "q")
 
 			mockGamer.EXPECT().Play()
+
+			main.Run(mockGamer, stdinReader, printer)
+		})
+	})
+
+	Context("entering the cheat code", func() {
+		It("can accept a code", func() {
+			secret := os.Getenv("MASTERMIND_SECRET")
+			code := "rrrr"
+			commandSequence(secret, code, "q")
+
+			mockGamer.EXPECT().Play(code)
 
 			main.Run(mockGamer, stdinReader, printer)
 		})
