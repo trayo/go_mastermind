@@ -31,7 +31,7 @@ func (c *Check) Guess(guess string) {
 }
 
 func (c *Check) Won() bool {
-	return c.CorrectPositions == 4
+	return c.CorrectPositions == len(c.code)
 }
 
 func findPositions(guess, code string) int {
