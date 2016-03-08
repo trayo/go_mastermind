@@ -10,3 +10,10 @@
 
 1. `$ rm $GO_PATH/bin/go_mastermind`
 1. `$ rm -r go/src/github.com/trayo/go_mastermind/`
+
+## Tools used
+
+- [fatih/colors](https://github.com/fatih/color)
+- [golang/mock](https://github.com/golang/mock)
+- [onsi/Ginkgo](https://github.com/onsi/ginkgo)
+- [onsi/Gomega](https://github.com/onsi/gomega)
