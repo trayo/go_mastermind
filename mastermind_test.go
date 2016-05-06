@@ -9,10 +9,11 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
+	"github.com/stretchr/testify/mock"
 
 	"github.com/trayo/go_mastermind"
 	"github.com/trayo/go_mastermind/print"
-	mocks "github.com/trayo/go_mastermind/test/mocks"
+	"github.com/trayo/go_mastermind/test/mocks"
 )
 
 var _ = Describe("Main CLI interaction", func() {
@@ -22,14 +23,14 @@ var _ = Describe("Main CLI interaction", func() {
 		stdinReader     *bufio.Reader
 		buffer          *gbytes.Buffer
 		printer         print.Printer
-		mockGamer       *mocks.MockGamer
+		mockGamer       *mocks.Gamer
 		commandSequence = func(args ...string) {
 			stdin.WriteString(strings.Join(args, "\n"))
 		}
 	)
 
 	BeforeEach(func() {
-		mockGamer = mocks.NewMockGamer(mockCtrl)
+		mockGamer = &mocks.Gamer{}
 
 		stdin = &bytes.Buffer{}
 		stdinReader = bufio.NewReader(stdin)
@@ -37,6 +38,10 @@ var _ = Describe("Main CLI interaction", func() {
 		buffer = gbytes.NewBuffer()
 
 		printer = print.NewPrinter(buffer)
+	})
+
+	AfterEach(func() {
+		Expect(mockGamer.AssertExpectations(GinkgoT())).To(BeTrue())
 	})
 
 	Context("when providing valid input", func() {
@@ -73,7 +78,7 @@ var _ = Describe("Main CLI interaction", func() {
 		It("can start a game", func() {
 			commandSequence("p", "q")
 
-			mockGamer.EXPECT().Play()
+			mockGamer.On("Play", mock.Anything).Times(1)
 
 			main.Run(mockGamer, stdinReader, printer)
 		})
@@ -85,7 +90,7 @@ var _ = Describe("Main CLI interaction", func() {
 			code := "rrrr"
 			commandSequence(secret, code, "q")
 
-			mockGamer.EXPECT().Play(code)
+			mockGamer.On("Play", mock.Anything).Times(1)
 
 			main.Run(mockGamer, stdinReader, printer)
 		})
