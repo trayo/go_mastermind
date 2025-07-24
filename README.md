@@ -1,7 +1,5 @@
 # Go Mastermind
 
-[![Circle CI](https://circleci.com/gh/trayo/go_mastermind.svg?style=svg)](https://circleci.com/gh/trayo/go_mastermind)
-
 ## How to download
 
 1. [Install Go](https://golang.org/doc/install)
